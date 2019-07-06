@@ -15,14 +15,14 @@ pipeline {
                     sh 'mvn clean compile'
                 }
             }
-		stage ('test Stage') {
+}
+stage ('test Stage') {
 
             steps {
                 withMaven(maven : 'LocalMaven') {
                     sh 'mvn test'
                 }
             }
-}
 }
 }
 }
