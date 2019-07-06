@@ -1,4 +1,4 @@
- pipeline {
+  pipeline {
      agent any
      stages {
          stage('clone my code'){
@@ -6,13 +6,12 @@
            }
          stage('compile my code') {
              
-             steps {
-                 withMaven(maven : 'LocalMaven') {
-                     sh 'mvn compile'
+            steps {
+                withMaven(maven : 'LocalMaven') {
+                    sh 'mvn compile'
                      
-                     }
-                     }
-                     }
-                     }
-                     }
-         
+                    }
+                   }
+                  }
+                 }
+                }
