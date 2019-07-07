@@ -35,12 +35,10 @@ stage ('install Stage') {
 stage ('deploy Stage') {
 
             steps {
-			{
-            sshagent (credentials: ['26327763-5695-4aea-b12f-f20fbe774708']) {
-            sh 'scp -o StrictHostKeyChecking=no */webapps/target*.war ec2-user@172.31.16.60:/usr/share/tomcat'
-            }
+		        sshagent (credentials: ['26327763-5695-4aea-b12f-f20fbe774708']) {
+                sh 'scp -o StrictHostKeyChecking=no */webapps/target*.war ec2-user@172.31.16.60:/usr/share/tomcat'
+                }
             }                
-}
 }
 }
 }
