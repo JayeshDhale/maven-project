@@ -32,7 +32,7 @@ stage ('install Stage') {
                 }
             }
 }
-stage {
+stage ('deploy Stage') {
 
             steps {
 			{
