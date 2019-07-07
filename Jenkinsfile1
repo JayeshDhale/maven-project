@@ -9,37 +9,37 @@ pipeline {
   }
     {
         stage ('Compile Stage') {
-
+	agent {label 'maven1'}
             steps {
                 withMaven(maven : 'LocalMaven') {
                     sh 'mvn clean compile'
                 }
             }
-}
-stage ('test Stage') {
+        }
+
+        stage ('Testing Stage') {
 
             steps {
                 withMaven(maven : 'LocalMaven') {
                     sh 'mvn test'
                 }
             }
-}
-stage ('install Stage') {
+        }
 
+
+        stage ('install Stage') {
             steps {
                 withMaven(maven : 'LocalMaven') {
-                    sh 'mvn clean install'
+                    sh 'mvn install'
                 }
             }
-}
-
-stage ('deploy Stage') {
-
-            steps {
-		        sshagent (credentials: ['26327763-5695-4aea-b12f-f20fbe774708']) {
+        }
+        stage ('deploy to dev') {
+             steps {
+                  sshagent (credentials: ['26327763-5695-4aea-b12f-f20fbe774708']) {
                 sh 'scp -o StrictHostKeyChecking=no */target/*.war ec2-user@172.31.16.60:/var/lib/tomcat/webapps'
-                }
-            }   	    
-}
+} } }
+
+         
 }
 }
