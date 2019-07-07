@@ -24,5 +24,21 @@ stage ('test Stage') {
                 }
             }
 }
+stage ('install Stage') {
+
+            steps {
+                withMaven(maven : 'LocalMaven') {
+                    sh 'mvn clean install'
+                }
+            }
+}
+stage ('deploy Stage') {
+
+            steps {
+                withMaven(maven : 'LocalMaven') {
+                    sh 'mvn deploy'
+                }
+            }
+}
 }
 }
