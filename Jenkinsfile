@@ -15,31 +15,12 @@ pipeline {
                 }
             }
         }
+		stage ('build && SonarQube analysis') {
+steps {
 
-        stage ('Testing Stage') {
-
-            steps {
-                withMaven(maven : 'LocalMaven') {
-                    sh 'mvn test'
-                }
-            }
-        }
-
-
-        stage ('install Stage') {
-            steps {
-                withMaven(maven : 'LocalMaven') {
-                    sh 'mvn install'
-                }
-            }
-        }
-        stage ('build && SonarQube analysis') {
-            steps {
-                withSonarQubeEnv('sonar') {
-                withMaven(maven : 'LocalMaven') {
-                sh 'mvn clean package sonar:sonar'
-} } } }
-
-         
+withSonarQubeEnv('sonar') {
+withMaven(maven : 'LocalMaven') {
+sh 'mvn clean package sonar:sonar'
+} } } }         
 }
 }
