@@ -33,11 +33,12 @@ pipeline {
                 }
             }
         }
-        stage ('deploy to dev') {
-             steps {
-                  sshagent (credentials: ['e2341f5c-2e83-4e46-ab03-6f5279becc8e']) {
-                sh 'scp -o StrictHostKeyChecking=no */target/*.war ec2-user@172.31.6.30:/var/lib/tomcat/webapps'
-} } }
+        stage ('build && SonarQube analysis') {
+            steps {
+                withSonarQubeEnv('sonar') {
+                withMaven(maven : 'LocalMaven') {
+                sh 'mvn clean package sonar:sonar'
+} } } }
 
          
 }
