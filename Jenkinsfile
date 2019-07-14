@@ -8,13 +8,12 @@ pipeline {
         }
   }
     {
-        stage ('Compile Stage') {
+        stage ('build && SonarQube analysis') {
+steps {
 
-            steps {
-                withMaven(maven : 'LocalMaven') {
-                    sh 'mvn clean compile'
-                }
-            }
-}
+withSonarQubeEnv('sonar for jenkins') {
+withMaven(maven : 'LocalMaven') {
+sh 'mvn clean package sonar:sonar'
+} } } }
 }
 }
