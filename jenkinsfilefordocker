@@ -11,12 +11,12 @@ sh label: '', script: 'mvn clean package'
 }
 
 stage ('docker image build') {
-sh 'docker build -t jayeshdhale/reshma-app:1.0.0 .'
+sh 'docker build -t jayeshdhale/jayesh-app:1.0.0 .'
 }
 stage ('Push Docker image to DockerHub') { 
 withCredentials([usernamePassword(credentialsId: 'dockerhubaccount', passwordVariable: 'dockerhubpassword', usernameVariable: 'dockerhubaccount')]) {
-sh "docker login -u jayeshdhale -p ${dockerhubaccount}" 
+sh "docker login -u jayeshdhale -p ${dockerhubpassword}" 
 } 
-sh 'docker push jayeshdhale/reshma-app:1.0.0' 
+sh 'docker push jayeshdhale/jayesh-app:1.0.0' 
 }
 }
