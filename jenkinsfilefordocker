@@ -17,6 +17,6 @@ stage ('Push Docker image to DockerHub') {
 withCredentials([string(credentialsId: 'dockerhubaccount', variable: 'dockerhubaccount')]) { 
 sh "docker login -u pkw0301 -p ${dockerhubaccount}" 
 } 
-sh 'docker push pkw0301/prakash-app:1.0.0' 
+sh 'docker push jayeshdhale/reshma-app:1.0.0' 
 }
 }
